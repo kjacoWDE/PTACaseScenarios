@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PTA Clinical Reasoning – Knee Case (SINSS)</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+    h1, h2 { margin-top: 1.2em; }
+    .card { border: 1px solid #ccc; padding: 15px; margin: 15px 0; border-radius: 6px; background: #fafafa; }
+    .question { margin-top: 10px; }
+    button { margin-top: 10px; padding: 8px 14px; cursor: pointer; }
+    .hidden { display: none; }
+    .feedback { margin-top: 10px; font-style: italic; color: #444; }
+  </style>
+</head>
+
+<body>
+
+<h1>The Knee That Didn’t Bounce Back</h1>
+<p>You are the PTA carrying out an established PT Plan of Care. Review the note, interview the patient, determine SINSS, then choose appropriate interventions.</p>
+
+<!-- PT Plan of Care -->
+<div class="card">
+  <h2>PT Plan of Care Note</h2>
+
+  <p><strong>Patient:</strong> 42-year-old male, UPS delivery driver, recreational runner.</p>
+
+  <p><strong>Chief Complaint:</strong> Right anterior knee pain x 3 weeks after increasing running mileage too quickly. Pain with stairs, squatting, running. Eases with rest and ice.</p>
+
+  <p><strong>Relevant History:</strong> No prior knee injuries. No imaging. Occasional ibuprofen.</p>
+
+  <p><strong>Objective Findings:</strong><br>
+    • Knee flexion: 130° (pain at end range)<br>
+    • Knee extension: 0°<br>
+    • Quad strength: 4/5 (pain)<br>
+    • Hip abductors: 4-/5<br>
+    • Tender patellar tendon, mild swelling<br>
+    • Positive patellar compression test<br>
+    • Pain descending stairs, squat pain at ~45°<br>
+    • Running tolerance reduced to 0.5 miles
+  </p>
+
+  <p><strong>PT Clinical Impression:</strong> Patellar tendinopathy (reactive stage) with quad weakness and hip control deficits.</p>
+
+  <p><strong>Short-Term Goals (2 weeks):</strong><br>
+    • Reduce stair pain by 50%<br>
+    • Quad strength 4+/5<br>
+    • Squat tolerance to 60°
+  </p>
+
+  <p><strong>Long-Term Goals (4–6 weeks):</strong><br>
+    • Return to running 2 miles pain-free<br>
+    • Quad strength 5/5<br>
+    • Full squat tolerance without pain
+  </p>
+
+  <p><strong>Treatment Plan:</strong> Isometric quad loading, hip strengthening, patellar tendon unloading strategies, activity modification, manual therapy PRN, progress to isotonic loading as tolerated.</p>
+</div>
+
+<!-- Patient Interview -->
+<div class="card">
+  <h2>Patient Interview</h2>
+
+  <div class="question">
+    <label>Pain level (0–10): </label>
+    <input type="number" id="painLevel" min="0" max="10">
+  </div>
+
+  <div class="question">
+    <label>How quickly do symptoms come on with activity?</label><br>
+    <select id="onsetSpeed">
+      <option value="">Select...</option>
+      <option value="slow">Slow, after prolonged activity</option>
+      <option value="moderate">Moderate, after some activity</option>
+      <option value="fast">Fast, with minimal activity</option>
+    </select>
+  </div>
+
+  <div class="question">
+    <label>How long do symptoms last after aggravating activity?</label><br>
+    <select id="duration">
+      <option value="">Select...</option>
+      <option value="short">Short (<30 min)</option>
+      <option value="medium">Medium (30–120 min)</option>
+      <option value="long">Long (>2 hours)</option>
+    </select>
+  </div>
+
+  <div class="question">
+    <label>How quickly and how long does relief occur with easing activities?</label><br>
+    <select id="relief">
+      <option value="">Select...</option>
+      <option value="quick">Quick relief, symptoms resolve fully</option>
+      <option value="partial">Partial relief, symptoms linger</option>
+      <option value="poor">Poor relief, symptoms persist</option>
+    </select>
+  </div>
+
+  <button onclick="calculateSINSS()">Determine SINSS</button>
+  <div id="sinssResult" class="feedback hidden"></div>
+</div>
+
+<!-- Intervention Selection -->
+<div class="card hidden" id="interventionsCard">
+  <h2>Intervention Selection</h2>
+  <p>Based on the SINSS profile, choose appropriate interventions for today’s visit.</p>
+
+  <div class="question">
+    <label><input type="checkbox" id="isometric"> Isometric quad loading</label><br>
+    <label><input type="checkbox" id="hipStrength"> Hip strengthening</label><br>
+    <label><input type="checkbox" id="isotonic"> High-load isotonic quad strengthening</label><br>
+    <label><input type="checkbox" id="manual"> Manual therapy to patellar tendon region</label><br>
+    <label><input type="checkbox" id="modalities"> Modalities for pain/swelling</label><br>
+    <label><input type="checkbox" id="education"> Education on load management</label>
+  </div>
+
+  <button onclick="evaluateInterventions()">Submit Interventions</button>
+  <div id="interventionFeedback" class="feedback hidden"></div>
+</div>
+
+<!-- Debrief -->
+<div class="card hidden" id="debriefCard">
+  <h2>Debrief</h2>
+  <p id="debriefText"></p>
+</div>
+
+<script>
+function calculateSINSS() {
+  const pain = Number(document.getElementById('painLevel').value);
+  const onset = document.getElementById('onsetSpeed').value;
+  const duration = document.getElementById('duration').value;
+  const relief = document.getElementById('relief').value;
+
+  if (isNaN(pain) || onset === "" || duration === "" || relief === "") {
+    alert("Please complete all interview fields.");
+    return;
+  }
+
+  let severity = "mild";
+  if (pain >= 7) severity = "high";
+  else if (pain >= 4) severity = "moderate";
+
+  let irritability = "mild";
+  if (onset === "fast" || duration === "long" || relief === "poor") irritability = "high";
+  else if (onset === "moderate" || duration === "medium" || relief === "partial") irritability = "moderate";
+
+  let nature = "nociceptive";
+  let stability = "same";
+  let stage = "subacute";
+
+  const resultDiv = document.getElementById('sinssResult');
+  resultDiv.classList.remove('hidden');
+  resultDiv.innerHTML =
+    `Severity: ${severity}<br>` +
+    `Irritability: ${irritability}<br>` +
+    `Nature: ${nature}<br>` +
+    `Stability: ${stability}<br>` +
+    `Stage: ${stage}`;
+
+  document.getElementById('interventionsCard').classList.remove('hidden');
+}
+
+function evaluateInterventions() {
+  const isometric = document.getElementById('isometric').checked;
+  const hipStrength = document.getElementById('hipStrength').checked;
+  const isotonic = document.getElementById('isotonic').checked;
+  const manual = document.getElementById('manual').checked;
+  const modalities = document.getElementById('modalities').checked;
+  const education = document.getElementById('education').checked;
+
+  let feedback = "";
+
+  if (isotonic) {
+    feedback += "High-load isotonic strengthening is not appropriate today due to moderate–high irritability. ";
+  }
+  if (!education) {
+    feedback += "Education on load management is essential for patellar tendinopathy. ";
+  }
+  if (isometric) {
+    feedback += "Isometric quad loading is appropriate for reactive tendinopathy. ";
+  }
+  if (hipStrength) {
+    feedback += "Hip strengthening supports knee load control. ";
+  }
+
+  const feedbackDiv = document.getElementById('interventionFeedback');
+  feedbackDiv.classList.remove('hidden');
+  feedbackDiv.innerHTML = feedback;
+
+  const debrief = document.getElementById('debriefCard');
+  const debriefText = document.getElementById('debriefText');
+  debrief.classList.remove('hidden');
+  debriefText.innerText =
+    "Moderate severity and moderate–high irritability suggest lower-intensity loading today. " +
+    "Isometrics and hip strengthening are appropriate. Avoid high-load isotonic quad work until irritability decreases.";
+}
+</script>
+
+</body>
+</html>
