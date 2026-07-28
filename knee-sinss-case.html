@@ -199,8 +199,178 @@
 </div>
 
 <script>
+// Interview answer functions (updated)
+function answerPain() {
+  appendSubjective("“It’s about a 6 out of 10 today. Best is 2/10, worst is 7/10.”");
+}
+
+function answerAgg() {
+  appendSubjective("“Stairs, squatting, running, and standing for a long time all make it worse.”");
+}
+
+function answerEase() {
+  appendSubjective("“Rest and ice help, but it still aches for a couple of hours afterward.”");
+}
+
+function answerOnset() {
+  appendSubjective("“It comes on pretty quickly once I start moving or loading it.”");
+}
+
+function answerDuration() {
+  appendSubjective("“If I aggravate it, the pain hangs around for a couple of hours.”");
+}
+
+function answerStability() {
+  appendSubjective("“Honestly, it’s been about the same this week.”");
+}
+
 // PRACTICE MODE: true = can change selections; false = testing mode
 let practiceMode = true;
 
 // Interview answers → Subjective Findings box
+function appendSubjective(text) {
+  const box = document.getElementById('subjectiveBox');
+  box.innerHTML += text + "<br>";
+}
+
+// SINSS storage
+const sinssLocked = {
+  severity: false,
+  irritability: false,
+  nature: false,
+  stability: false,
+  stage: false
+};
+
+const sinssValues = {
+  severity: "",
+  irritability: "",
+  nature: "",
+  stability: "",
+  stage: ""
+};
+
+function showSINSSCard() {
+  document.getElementById('sinssCard').classList.remove('hidden');
+}
+
+function selectSINSS(component, choice) {
+  if (!practiceMode && sinssLocked[component]) return;
+
+  const fb = document.getElementById(component + "Feedback");
+  fb.classList.remove("hidden");
+
+  let text = "";
+
+  if (component === "severity") {
+    if (choice === "moderate") {
+      text = "<strong>Holds up</strong><br>6/10 with activity fits the moderate band.";
+      sinssValues.severity = "Moderate (4–6/10)";
+    } else if (choice === "mild") {
+      text = "<strong>Not quite</strong><br>His pain reaches 6–7/10 with stairs.";
+      sinssValues.severity = "Mild";
+    } else {
+      text = "<strong>Not quite</strong><br>Severe would be 7–10/10 consistently.";
+      sinssValues.severity = "Severe";
+    }
+  }
+
+  if (component === "irritability") {
+    if (choice === "high") {
+      text = "<strong>Holds up</strong><br>Pain comes on quickly and lingers for hours.";
+      sinssValues.irritability = "High";
+    } else if (choice === "moderate") {
+      text = "<strong>Not quite</strong><br>Moderate irritability settles faster.";
+      sinssValues.irritability = "Moderate";
+    } else {
+      text = "<strong>Not quite</strong><br>Low irritability would resolve quickly.";
+      sinssValues.irritability = "Low";
+    }
+  }
+
+  if (component === "nature") {
+    if (choice === "nociceptive") {
+      text = "<strong>Holds up</strong><br>Localized anterior knee pain with mechanical load sensitivity.";
+      sinssValues.nature = "Nociceptive";
+    } else if (choice === "neuropathic") {
+      text = "<strong>Not quite</strong><br>No pins/needles or radiating symptoms.";
+      sinssValues.nature = "Neuropathic";
+    } else {
+      text = "<strong>Not quite</strong><br>Nociplastic pain is less mechanically predictable.";
+      sinssValues.nature = "Nociplastic";
+    }
+  }
+
+  if (component === "stability") {
+    if (choice === "same") {
+      text = "<strong>Holds up</strong><br>Symptoms have been stable over the past week.";
+      sinssValues.stability = "Same";
+    } else if (choice === "improving") {
+      text = "<strong>Not quite</strong><br>No clear trend of improvement.";
+      sinssValues.stability = "Improving";
+    } else {
+      text = "<strong>Not quite</strong><br>No evidence of worsening.";
+      sinssValues.stability = "Worsening";
+    }
+  }
+
+  if (component === "stage") {
+    if (choice === "subacute") {
+      text = "<strong>Holds up</strong><br>Three weeks fits the subacute band.";
+      sinssValues.stage = "Subacute (2–6 weeks)";
+    } else if (choice === "acute") {
+      text = "<strong>Not quite</strong><br>Acute fits the first few days.";
+      sinssValues.stage = "Acute (1–14 days)";
+    } else {
+      text = "<strong>Not quite</strong><br>Chronic fits months of symptoms.";
+      sinssValues.stage = "Chronic (> 6 weeks)";
+    }
+  }
+
+  fb.innerHTML = text;
+
+  // Color coding
+  if (text.startsWith("<strong>Holds up")) {
+    fb.style.backgroundColor = "#dfeaff";   // light blue
+  } else {
+    fb.style.backgroundColor = "#fff4b3";   // light yellow
+  }
+
+  if (!practiceMode) sinssLocked[component] = true;
+}
+
+function showInterventions() {
+  document.getElementById('interventionsCard').classList.remove('hidden');
+
+  // Populate SINSS Readout
+  const readout = document.getElementById('sinssReadout');
+  readout.innerHTML =
+    "Severity: " + sinssValues.severity + "<br>" +
+    "Irritability: " + sinssValues.irritability + "<br>" +
+    "Nature: " + sinssValues.nature + "<br>" +
+    "Stability: " + sinssValues.stability + "<br>" +
+    "Stage: " + sinssValues.stage;
+}
+
+function evaluateInterventions() {
+  const isometric = document.getElementById('isometric').checked;
+  const hipStrength = document.getElementById('hipStrength').checked;
+  const isotonic = document.getElementById('isotonic').checked;
+  const manual = document.getElementById('manual').checked;
+  const modalities = document.getElementById('modalities').checked;
+  const education = document.getElementById('education').checked;
+
+  let fb = "";
+
+  if (isotonic) fb += "High-load isotonic strengthening is not appropriate today. ";
+  if (!education) fb += "Education on load management is essential. ";
+  if (isometric) fb += "Isometric quad loading is appropriate for reactive tendinopathy. ";
+  if (hipStrength) fb += "Hip strengthening supports knee load control. ";
+
+  const div = document.getElementById('interventionFeedback');
+  div.classList.remove('hidden');
+  div.innerHTML = fb;
+}
+</script>
+
 function appendSubjective(text)
