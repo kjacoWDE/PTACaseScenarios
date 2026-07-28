@@ -4,303 +4,203 @@
   <meta charset="UTF-8">
   <title>PTA Clinical Reasoning – Knee Case (SINSS)</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; }
-    h1, h2, h3 { margin-top: 1.2em; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    h1 { padding: 20px; background: #003366; color: white; margin: 0; }
+    .container { display: flex; flex-direction: row; }
+    .left { width: 60%; padding: 20px; background: #f7f7f7; }
+    .right { width: 40%; padding: 20px; background: #ffffff; border-left: 2px solid #ccc; }
     .card { border: 1px solid #ccc; padding: 15px; margin: 15px 0; border-radius: 6px; background: #fafafa; }
     .question { margin-top: 10px; }
     button { margin-top: 10px; padding: 8px 14px; cursor: pointer; }
     .hidden { display: none; }
-    .feedback { margin-top: 10px; padding: 10px; border-radius: 6px; background: #eef; }
+    .feedback { margin-top: 10px; padding: 10px; border-radius: 6px; }
   </style>
 </head>
 
 <body>
 
 <h1>The Knee That Didn’t Bounce Back</h1>
-<p>You are the PTA carrying out an established PT Plan of Care. Review the note, interview the patient, determine SINSS, then choose appropriate interventions.</p>
 
-<div class="card">
-  <h2>PT Plan of Care Note</h2>
+<div class="container">
 
-  <h3>Diagnosis</h3>
-  <p>Reactive patellar tendinopathy of the right knee.</p>
+<!-- LEFT COLUMN -->
+<div class="left">
 
-  <h3>Mechanism of Injury</h3>
-  <p>Patient reports onset of anterior knee pain after increasing running mileage and adding downhill routes. Symptoms began after a 3-mile run with stair descents.</p>
+  <!-- PT Plan of Care -->
+  <div class="card">
+    <h2>1. Plan of Care</h2>
 
-  <h3>Date of Injury</h3>
-  <p>Symptoms began approximately 3 weeks ago.</p>
+    <h3>Diagnosis</h3>
+    <p>Reactive patellar tendinopathy of the right knee.</p>
 
-  <h3>Subjective</h3>
-  <p>
-    • Current pain: 6/10<br>
-    • Best: 2/10<br>
-    • Worst: 7/10<br>
-    • Pain pattern: intermittent anterior knee pain<br>
-    • 24-hour pattern: worse with activity, mild morning stiffness<br>
-    • Stability: symptoms unchanged over past week<br>
-    • Previous activity: running 3–4 miles, 3x/week<br>
-    • Current limitations: stairs, squatting, prolonged standing<br>
-    • Patient goals: return to running without pain
-  </p>
+    <h3>Mechanism of Injury</h3>
+    <p>Pain began after increasing running mileage and adding downhill routes. Symptoms started after a 3-mile run with stair descents.</p>
 
-  <h3>Objective</h3>
+    <h3>Date of Injury</h3>
+    <p>Symptoms began approximately 3 weeks ago.</p>
 
-  <p><strong>ROM (AROM/PROM):</strong><br>
-    • R knee flexion AROM: 130° (pain end range)<br>
-    • R knee extension AROM: 0°<br>
-    • L knee flexion AROM: 140°<br>
-    • L knee extension AROM: 0°
-  </p>
+    <h3>Subjective</h3>
+    <p>
+      • Current pain: 6/10<br>
+      • Best: 2/10<br>
+      • Worst: 7/10<br>
+      • Pain pattern: intermittent anterior knee pain<br>
+      • 24-hour pattern: worse with activity, mild morning stiffness<br>
+      • Stability: symptoms unchanged over past week<br>
+      • Previous activity: running 3–4 miles, 3x/week<br>
+      • Current limitations: stairs, squatting, prolonged standing<br>
+      • Patient goals: return to running without pain
+    </p>
 
-  <p><strong>Strength (MMT):</strong><br>
-    • R quad: 4/5 (pain)<br>
-    • L quad: 5/5<br>
-    • R hip abductors: 4-/5<br>
-    • L hip abductors: 4+/5
-  </p>
+    <h3>Objective</h3>
+    <p><strong>ROM:</strong><br>
+      • R knee flexion AROM: 130° (pain end range)<br>
+      • R knee extension AROM: 0°<br>
+      • L knee flexion AROM: 140°<br>
+      • L knee extension AROM: 0°
+    </p>
 
-  <p><strong>Accessory Motion:</strong><br>
-    • Patellar superior glide: hypomobile and painful
-  </p>
+    <p><strong>Strength:</strong><br>
+      • R quad: 4/5 (pain)<br>
+      • L quad: 5/5<br>
+      • R hip abductors: 4-/5<br>
+      • L hip abductors: 4+/5
+    </p>
 
-  <p><strong>Flexibility / MLT:</strong><br>
-    • Quadriceps: mild tightness R>L
-  </p>
+    <p><strong>Accessory Motion:</strong><br>
+      • Patellar superior glide: hypomobile and painful
+    </p>
 
-  <p><strong>Movement Analysis:</strong><br>
-    • Dynamic valgus during squat<br>
-    • Pain at ~45° knee flexion
-  </p>
+    <p><strong>Movement Analysis:</strong><br>
+      • Dynamic valgus during squat<br>
+      • Pain at ~45° knee flexion
+    </p>
 
-  <p><strong>Palpation:</strong><br>
-    • Tender patellar tendon<br>
-    • Mild swelling
-  </p>
+    <p><strong>Special Tests:</strong><br>
+      • Valgus stress test: negative<br>
+      • Varus stress test: negative<br>
+      • Lachman: negative<br>
+      • Anterior drawer: negative<br>
+      • Patellar compression test: positive
+    </p>
 
-  <p><strong>Special Tests:</strong><br>
-    • Valgus stress test: negative bilaterally<br>
-    • Varus stress test: negative bilaterally<br>
-    • Lachman test: negative bilaterally<br>
-    • Anterior drawer: negative bilaterally<br>
-    • Patellar compression test: positive (pain reproduced with compression during quad contraction)
-  </p>
+    <p><strong>Other:</strong><br>
+      • Pain descending stairs: 7/10<br>
+      • Pain running: 6/10 after 0.5 miles
+    </p>
+  </div>
 
-  <p><strong>Other:</strong><br>
-    • Pain descending stairs: 7/10<br>
-    • Pain during running: 6/10 after 0.5 miles<br>
-    • Running tolerance: 0.5 miles
-  </p>
+  <!-- Patient Interview -->
+  <div class="card">
+    <h2>2. Interview</h2>
+    <p>Click each question to ask the patient.</p>
 
-  <h3>Assessment</h3>
-  <p>Reactive patellar tendinopathy with quad weakness and hip control deficits.</p>
+    <div class="question">
+      <button onclick="answerPain()">Pain today?</button>
+    </div>
 
-  <h3>Plan</h3>
-  <p>
-    • Isometric quad loading<br>
-    • Hip strengthening<br>
-    • Patellar tendon unloading strategies<br>
-    • Activity modification<br>
-    • Manual therapy PRN<br>
-    • Progress to isotonic loading as tolerated
-  </p>
+    <div class="question">
+      <button onclick="answerAgg()">Aggravating factors?</button>
+    </div>
+
+    <div class="question">
+      <button onclick="answerEase()">Easing factors?</button>
+    </div>
+
+    <div class="question">
+      <button onclick="answerOnset()">Onset speed?</button>
+    </div>
+
+    <div class="question">
+      <button onclick="answerDuration()">Duration after activity?</button>
+    </div>
+
+    <div class="question">
+      <button onclick="answerStability()">Stability?</button>
+    </div>
+
+    <button onclick="showSINSSCard()">Proceed to SINSS Classification</button>
+  </div>
+
+  <!-- SINSS Assignment -->
+  <div class="card hidden" id="sinssCard">
+    <h2>3. Classify SINSS</h2>
+    <p>Pick once per row — you’ll see whether it holds up and why.</p>
+
+    <!-- Severity -->
+    <h3>Severity</h3>
+    <button onclick="selectSINSS('severity','mild')">Mild</button>
+    <button onclick="selectSINSS('severity','moderate')">Moderate</button>
+    <button onclick="selectSINSS('severity','severe')">Severe</button>
+    <div id="severityFeedback" class="feedback hidden"></div>
+
+    <!-- Irritability -->
+    <h3>Irritability</h3>
+    <button onclick="selectSINSS('irritability','low')">Low</button>
+    <button onclick="selectSINSS('irritability','moderate')">Moderate</button>
+    <button onclick="selectSINSS('irritability','high')">High</button>
+    <div id="irritabilityFeedback" class="feedback hidden"></div>
+
+    <!-- Nature -->
+    <h3>Nature</h3>
+    <button onclick="selectSINSS('nature','nociceptive')">Nociceptive</button>
+    <button onclick="selectSINSS('nature','neuropathic')">Neuropathic</button>
+    <button onclick="selectSINSS('nature','nociplastic')">Nociplastic</button>
+    <div id="natureFeedback" class="feedback hidden"></div>
+
+    <!-- Stability -->
+    <h3>Stability</h3>
+    <button onclick="selectSINSS('stability','improving')">Improving</button>
+    <button onclick="selectSINSS('stability','same')">Same</button>
+    <button onclick="selectSINSS('stability','worsening')">Worsening</button>
+    <div id="stabilityFeedback" class="feedback hidden"></div>
+
+    <!-- Stage -->
+    <h3>Stage</h3>
+    <button onclick="selectSINSS('stage','acute')">Acute</button>
+    <button onclick="selectSINSS('stage','subacute')">Subacute</button>
+    <button onclick="selectSINSS('stage','chronic')">Chronic</button>
+    <div id="stageFeedback" class="feedback hidden"></div>
+
+    <button onclick="showInterventions()">Proceed to Interventions</button>
+  </div>
+
+  <!-- Interventions -->
+  <div class="card hidden" id="interventionsCard">
+    <h2>4. Interventions</h2>
+
+    <label><input type="checkbox" id="isometric"> Isometric quad loading</label><br>
+    <label><input type="checkbox" id="hipStrength"> Hip strengthening</label><br>
+    <label><input type="checkbox" id="isotonic"> High-load isotonic quad strengthening</label><br>
+    <label><input type="checkbox" id="manual"> Manual therapy</label><br>
+    <label><input type="checkbox" id="modalities"> Modalities</label><br>
+    <label><input type="checkbox" id="education"> Education</label><br>
+
+    <button onclick="evaluateInterventions()">Submit</button>
+    <div id="interventionFeedback" class="feedback hidden"></div>
+  </div>
+
 </div>
 
+<!-- RIGHT COLUMN -->
+<div class="right">
+  <h2>Patient Profile</h2>
+  <p><strong>Name:</strong> Chris Ramirez</p>
+  <p><strong>Age:</strong> 29</p>
+  <p><strong>Activity:</strong> Recreational runner</p>
 
-<!-- Patient Interview -->
-<div class="card">
-  <h2>Patient Interview</h2>
-  <p>Click each question to ask the patient. Answers will appear in the Subjective Findings box.</p>
-
-  <div class="question"><button onclick="answerPain()">Ask: Can you tell me about your pain today?</button></div>
-  <div class="question"><button onclick="answerAgg()">Ask: What activities make your symptoms worse?</button></div>
-  <div class="question"><button onclick="answerEase()">Ask: What helps your symptoms?</button></div>
-  <div class="question"><button onclick="answerOnset()">Ask: How quickly does your pain come on?</button></div>
-  <div class="question"><button onclick="answerDuration()">Ask: How long does your pain last after activity?</button></div>
-  <div class="question"><button onclick="answerStability()">Ask: Has anything changed since your last visit?</button></div>
-</div>
-
-<!-- Subjective Findings -->
-<div class="card" id="subjectiveCard">
-  <h2>Subjective Findings</h2>
+  <h3>Subjective Findings</h3>
   <div id="subjectiveBox" class="feedback"></div>
-  <button onclick="showSINSSCard()">Classify his status</button>
+
+  <h3>SINSS Readout</h3>
+  <div id="sinssReadout" class="feedback"></div>
 </div>
 
-<!-- SINSS Assignment -->
-<div class="card hidden" id="sinssCard">
-  <h2>Phase 3 – Classify</h2>
-  <p>Set his SINSS values. Use the findings above. Pick once per row — you’ll see whether it holds up and why.</p>
-
-  <!-- Severity -->
-  <h3>Severity</h3>
-  <button onclick="selectSINSS('severity','mild')">Mild</button>
-  <button onclick="selectSINSS('severity','moderate')">Moderate</button>
-  <button onclick="selectSINSS('severity','severe')">Severe</button>
-  <div id="severityFeedback" class="feedback hidden"></div>
-
-  <!-- Irritability -->
-  <h3>Irritability</h3>
-  <button onclick="selectSINSS('irritability','low')">Low</button>
-  <button onclick="selectSINSS('irritability','moderate')">Moderate</button>
-  <button onclick="selectSINSS('irritability','high')">High</button>
-  <div id="irritabilityFeedback" class="feedback hidden"></div>
-
-  <!-- Nature -->
-  <h3>Nature</h3>
-  <button onclick="selectSINSS('nature','nociceptive')">Nociceptive</button>
-  <button onclick="selectSINSS('nature','neuropathic')">Neuropathic</button>
-  <button onclick="selectSINSS('nature','nociplastic')">Nociplastic</button>
-  <div id="natureFeedback" class="feedback hidden"></div>
-
-  <!-- Stability -->
-  <h3>Stability</h3>
-  <button onclick="selectSINSS('stability','improving')">Improving</button>
-  <button onclick="selectSINSS('stability','same')">Same</button>
-  <button onclick="selectSINSS('stability','worsening')">Worsening</button>
-  <div id="stabilityFeedback" class="feedback hidden"></div>
-
-  <!-- Stage -->
-  <h3>Stage</h3>
-  <button onclick="selectSINSS('stage','acute')">Acute</button>
-  <button onclick="selectSINSS('stage','subacute')">Subacute</button>
-  <button onclick="selectSINSS('stage','chronic')">Chronic</button>
-  <div id="stageFeedback" class="feedback hidden"></div>
-
-  <button onclick="showInterventions()">Proceed to Intervention Selection</button>
-</div>
-
-<!-- Intervention Selection -->
-<div class="card hidden" id="interventionsCard">
-  <h2>Intervention Selection</h2>
-
-  <label><input type="checkbox" id="isometric"> Isometric quad loading</label><br>
-  <label><input type="checkbox" id="hipStrength"> Hip strengthening</label><br>
-  <label><input type="checkbox" id="isotonic"> High-load isotonic quad strengthening</label><br>
-  <label><input type="checkbox" id="manual"> Manual therapy to patellar tendon region</label><br>
-  <label><input type="checkbox" id="modalities"> Modalities for pain/swelling</label><br>
-  <label><input type="checkbox" id="education"> Education on load management</label><br>
-
-  <button onclick="evaluateInterventions()">Submit Interventions</button>
-  <div id="interventionFeedback" class="feedback hidden"></div>
-</div>
-
-<!-- Debrief -->
-<div class="card hidden" id="debriefCard">
-  <h2>Debrief</h2>
-  <p id="debriefText"></p>
 </div>
 
 <script>
-// PRACTICE MODE: true = can change selections; false = testing mode (locks)
+// PRACTICE MODE: true = can change selections; false = testing mode
 let practiceMode = true;
 
-// Append interview answers
-function appendSubjective(text) {
-  const box = document.getElementById('subjectiveBox');
-  box.innerHTML += text + "<br>";
-}
-
-function answerPain() { appendSubjective("Pain: about 6/10 today. Best 2/10, worst 7/10."); }
-function answerAgg() { appendSubjective("Aggravating: stairs, squatting, running, prolonged standing."); }
-function answerEase() { appendSubjective("Easing: rest and ice help, but pain lingers for hours."); }
-function answerOnset() { appendSubjective("Onset: pain comes on quickly with activity."); }
-function answerDuration() { appendSubjective("Duration: symptoms last a couple hours after activity."); }
-function answerStability() { appendSubjective("Stability: about the same over the past week."); }
-
-function showSINSSCard() {
-  document.getElementById('sinssCard').classList.remove('hidden');
-}
-
-const sinssLocked = {
-  severity: false,
-  irritability: false,
-  nature: false,
-  stability: false,
-  stage: false
-};
-
-function selectSINSS(component, choice) {
-  if (!practiceMode && sinssLocked[component]) return;
-
-  const fb = document.getElementById(component + "Feedback");
-  fb.classList.remove("hidden");
-
-  let text = "";
-
-  if (component === "severity") {
-    if (choice === "moderate") text = "<strong>Holds up</strong><br>6/10 with activity fits the moderate band.";
-    else if (choice === "mild") text = "<strong>Not quite</strong><br>His pain reaches 6–7/10 with stairs.";
-    else text = "<strong>Not quite</strong><br>Severe would be 7–10/10 consistently.";
-  }
-
-  if (component === "irritability") {
-    if (choice === "high") text = "<strong>Holds up</strong><br>Pain comes on quickly and lingers for hours.";
-    else if (choice === "moderate") text = "<strong>Not quite</strong><br>Moderate irritability settles faster.";
-    else text = "<strong>Not quite</strong><br>Low irritability would resolve quickly.";
-  }
-
-  if (component === "nature") {
-    if (choice === "nociceptive") text = "<strong>Holds up</strong><br>Localized anterior knee pain with mechanical load sensitivity.";
-    else if (choice === "neuropathic") text = "<strong>Not quite</strong><br>No pins/needles or radiating symptoms.";
-    else text = "<strong>Not quite</strong><br>Nociplastic pain is less mechanically predictable.";
-  }
-
-  if (component === "stability") {
-    if (choice === "same") text = "<strong>Holds up</strong><br>Symptoms have been stable over the past week.";
-    else if (choice === "improving") text = "<strong>Not quite</strong><br>No clear trend of improvement.";
-    else text = "<strong>Not quite</strong><br>No evidence of worsening.";
-  }
-
-  if (component === "stage") {
-    if (choice === "subacute") text = "<strong>Holds up</strong><br>Three weeks fits the subacute band.";
-    else if (choice === "acute") text = "<strong>Not quite</strong><br>Acute fits the first few days.";
-    else text = "<strong>Not quite</strong><br>Chronic fits months of symptoms.";
-  }
-
-fb.innerHTML = text;
-
-// Color coding: blue = correct, yellow = incorrect
-if (text.startsWith("<strong>Holds up")) {
-  fb.style.backgroundColor = "#dfeaff";   // light blue
-} else {
-  fb.style.backgroundColor = "#fff4b3";   // light yellow
-}
-
-
-  if (!practiceMode) sinssLocked[component] = true;
-}
-
-function showInterventions() {
-  document.getElementById('interventionsCard').classList.remove('hidden');
-}
-
-function evaluateInterventions() {
-  const isometric = document.getElementById('isometric').checked;
-  const hipStrength = document.getElementById('hipStrength').checked;
-  const isotonic = document.getElementById('isotonic').checked;
-  const manual = document.getElementById('manual').checked;
-  const modalities = document.getElementById('modalities').checked;
-  const education = document.getElementById('education').checked;
-
-  let fb = "";
-
-  if (isotonic) fb += "High-load isotonic strengthening is not appropriate today. ";
-  if (!education) fb += "Education on load management is essential. ";
-  if (isometric) fb += "Isometric quad loading is appropriate for reactive tendinopathy. ";
-  if (hipStrength) fb += "Hip strengthening supports knee load control. ";
-
-  const div = document.getElementById('interventionFeedback');
-  div.classList.remove('hidden');
-  div.innerHTML = fb;
-
-  const d = document.getElementById('debriefCard');
-  const dt = document.getElementById('debriefText');
-  d.classList.remove('hidden');
-  dt.innerText =
-    "A moderate severity, high irritability, nociceptive, subacute presentation calls for lower-intensity loading and careful progression.";
-}
-</script>
-
-</body>
-</html>
+// Interview answers → Subjective Findings box
+function appendSubjective(text)
