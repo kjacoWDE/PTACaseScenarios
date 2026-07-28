@@ -6,14 +6,15 @@
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
     h1 { padding: 20px; background: #003366; color: white; margin: 0; }
-    .container { display: flex; flex-direction: row; }
-    .left { width: 60%; padding: 20px; background: #f7f7f7; }
-    .right { width: 40%; padding: 20px; background: #ffffff; border-left: 2px solid #ccc; }
+    .container { display: flex; flex-direction: row; height: calc(100vh - 60px); }
+    .left { width: 60%; padding: 20px; background: #f7f7f7; overflow-y: auto; }
+    .right { width: 40%; padding: 20px; background: #ffffff; border-left: 2px solid #ccc; overflow-y: auto; }
     .card { border: 1px solid #ccc; padding: 15px; margin: 15px 0; border-radius: 6px; background: #fafafa; }
     .question { margin-top: 10px; }
     button { margin-top: 10px; padding: 8px 14px; cursor: pointer; }
     .hidden { display: none; }
-    .feedback { margin-top: 10px; padding: 10px; border-radius: 6px; }
+    .feedback { margin-top: 10px; padding: 10px; border-radius: 6px; background: #f0f0f0; }
+    .nav-row { display: flex; justify-content: space-between; margin-top: 15px; }
   </style>
 </head>
 
@@ -23,12 +24,12 @@
 
 <div class="container">
 
-<!-- LEFT COLUMN -->
+<!-- LEFT COLUMN: STEP CARDS -->
 <div class="left">
 
-  <!-- PT Plan of Care -->
-  <div class="card">
-    <h2>1. Plan of Care</h2>
+  <!-- STEP 1: PLAN OF CARE -->
+  <div class="card" id="step1">
+    <h2>Step 1 • Plan of Care</h2>
 
     <h3>Diagnosis</h3>
     <p>Reactive patellar tendinopathy of the right knee.</p>
@@ -88,50 +89,57 @@
       • Pain descending stairs: 7/10<br>
       • Pain running: 6/10 after 0.5 miles
     </p>
+
+    <div class="nav-row">
+      <span></span>
+      <button onclick="showStep(2)">Interview Patient →</button>
+    </div>
   </div>
 
-  <!-- Patient Interview -->
- <div class="card">
-  <h2>2. Interview</h2>
-  <p>Click each question to ask the patient.</p>
+  <!-- STEP 2: INTERVIEW -->
+  <div class="card hidden" id="step2">
+    <h2>Step 2 • Interview</h2>
+    <p>Click each question to ask the patient. Answers appear under the button and in the Subjective Findings box.</p>
 
-  <div class="question">
-    <button onclick="answerPain()">“Can you tell me how your knee is feeling today?”</button>
-    <div id="localPain" class="feedback"></div>
+    <div class="question">
+      <button onclick="answerPain()">“Can you tell me how your knee is feeling today?”</button>
+      <div id="localPain" class="feedback"></div>
+    </div>
+
+    <div class="question">
+      <button onclick="answerAgg()">“What activities tend to make your knee pain worse?”</button>
+      <div id="localAgg" class="feedback"></div>
+    </div>
+
+    <div class="question">
+      <button onclick="answerEase()">“What have you found that helps ease your symptoms?”</button>
+      <div id="localEase" class="feedback"></div>
+    </div>
+
+    <div class="question">
+      <button onclick="answerOnset()">“When you start an activity, how quickly does the pain come on?”</button>
+      <div id="localOnset" class="feedback"></div>
+    </div>
+
+    <div class="question">
+      <button onclick="answerDuration()">“After an activity aggravates it, how long does the pain usually last?”</button>
+      <div id="localDuration" class="feedback"></div>
+    </div>
+
+    <div class="question">
+      <button onclick="answerStability()">“Since your last visit, have your symptoms changed at all?”</button>
+      <div id="localStability" class="feedback"></div>
+    </div>
+
+    <div class="nav-row">
+      <button onclick="showStep(1)">← Back to Plan of Care</button>
+      <button onclick="showStep(3)">Classify SINSS →</button>
+    </div>
   </div>
 
-  <div class="question">
-    <button onclick="answerAgg()">“What activities tend to make your knee pain worse?”</button>
-    <div id="localAgg" class="feedback"></div>
-  </div>
-
-  <div class="question">
-    <button onclick="answerEase()">“What have you found that helps ease your symptoms?”</button>
-    <div id="localEase" class="feedback"></div>
-  </div>
-
-  <div class="question">
-    <button onclick="answerOnset()">“When you start an activity, how quickly does the pain come on?”</button>
-    <div id="localOnset" class="feedback"></div>
-  </div>
-
-  <div class="question">
-    <button onclick="answerDuration()">“After an activity aggravates it, how long does the pain usually last?”</button>
-    <div id="localDuration" class="feedback"></div>
-  </div>
-
-  <div class="question">
-    <button onclick="answerStability()">“Since your last visit, have your symptoms changed at all?”</button>
-    <div id="localStability" class="feedback"></div>
-  </div>
-
-  <button onclick="showSINSSCard()">Proceed to SINSS Classification</button>
-</div>
-
-
-  <!-- SINSS Assignment -->
-  <div class="card hidden" id="sinssCard">
-    <h2>3. Classify SINSS</h2>
+  <!-- STEP 3: SINSS -->
+  <div class="card hidden" id="step3">
+    <h2>Step 3 • Classify SINSS</h2>
     <p>Pick once per row — you’ll see whether it holds up and why.</p>
 
     <!-- Severity -->
@@ -169,12 +177,17 @@
     <button onclick="selectSINSS('stage','chronic')">Chronic</button>
     <div id="stageFeedback" class="feedback hidden"></div>
 
-    <button onclick="showInterventions()">Proceed to Interventions</button>
+    <div class="nav-row">
+      <button onclick="showStep(2)">← Back to Interview</button>
+      <button onclick="showStep(4)">Interventions →</button>
+    </div>
   </div>
 
-  <!-- Interventions -->
-  <div class="card hidden" id="interventionsCard">
-    <h2>4. Interventions</h2>
+  <!-- STEP 4: INTERVENTIONS -->
+  <div class="card hidden" id="step4">
+    <h2>Step 4 • Interventions</h2>
+
+    <p>Select the interventions you think fit today’s status.</p>
 
     <label><input type="checkbox" id="isometric"> Isometric quad loading</label><br>
     <label><input type="checkbox" id="hipStrength"> Hip strengthening</label><br>
@@ -185,11 +198,16 @@
 
     <button onclick="evaluateInterventions()">Submit</button>
     <div id="interventionFeedback" class="feedback hidden"></div>
+
+    <div class="nav-row">
+      <button onclick="showStep(3)">← Back to SINSS</button>
+      <span></span>
+    </div>
   </div>
 
 </div>
 
-<!-- RIGHT COLUMN -->
+<!-- RIGHT COLUMN: FIXED PATIENT CHART -->
 <div class="right">
   <h2>Patient Profile</h2>
   <p><strong>Name:</strong> Chris Ramirez</p>
@@ -206,7 +224,30 @@
 </div>
 
 <script>
-// Interview answer functions (updated)
+// STEP NAVIGATION
+function showStep(n) {
+  const steps = [1, 2, 3, 4];
+  steps.forEach(step => {
+    const card = document.getElementById("step" + step);
+    if (step === n) {
+      card.classList.remove("hidden");
+    } else {
+      card.classList.add("hidden");
+    }
+  });
+
+  // When entering SINSS or Interventions, update readout
+  if (n === 3 || n === 4) {
+    updateSINSSReadout();
+  }
+}
+
+// INTERVIEW ANSWERS
+function appendSubjective(text) {
+  const box = document.getElementById('subjectiveBox');
+  box.innerHTML += text + "<br>";
+}
+
 function answerPain() {
   const text = "“It’s about a 6 out of 10 today. Best is 2/10, worst is 7/10.”";
   appendSubjective(text);
@@ -246,12 +287,6 @@ function answerStability() {
 // PRACTICE MODE: true = can change selections; false = testing mode
 let practiceMode = true;
 
-// Interview answers → Subjective Findings box
-function appendSubjective(text) {
-  const box = document.getElementById('subjectiveBox');
-  box.innerHTML += text + "<br>";
-}
-
 // SINSS storage
 const sinssLocked = {
   severity: false,
@@ -268,10 +303,6 @@ const sinssValues = {
   stability: "",
   stage: ""
 };
-
-function showSINSSCard() {
-  document.getElementById('sinssCard').classList.remove('hidden');
-}
 
 function selectSINSS(component, choice) {
   if (!practiceMode && sinssLocked[component]) return;
@@ -356,21 +387,21 @@ function selectSINSS(component, choice) {
   }
 
   if (!practiceMode) sinssLocked[component] = true;
+
+  updateSINSSReadout();
 }
 
-function showInterventions() {
-  document.getElementById('interventionsCard').classList.remove('hidden');
-
-  // Populate SINSS Readout
+function updateSINSSReadout() {
   const readout = document.getElementById('sinssReadout');
   readout.innerHTML =
-    "Severity: " + sinssValues.severity + "<br>" +
-    "Irritability: " + sinssValues.irritability + "<br>" +
-    "Nature: " + sinssValues.nature + "<br>" +
-    "Stability: " + sinssValues.stability + "<br>" +
-    "Stage: " + sinssValues.stage;
+    "Severity: " + (sinssValues.severity || "—") + "<br>" +
+    "Irritability: " + (sinssValues.irritability || "—") + "<br>" +
+    "Nature: " + (sinssValues.nature || "—") + "<br>" +
+    "Stability: " + (sinssValues.stability || "—") + "<br>" +
+    "Stage: " + (sinssValues.stage || "—");
 }
 
+// INTERVENTIONS
 function evaluateInterventions() {
   const isometric = document.getElementById('isometric').checked;
   const hipStrength = document.getElementById('hipStrength').checked;
@@ -385,11 +416,16 @@ function evaluateInterventions() {
   if (!education) fb += "Education on load management is essential. ";
   if (isometric) fb += "Isometric quad loading is appropriate for reactive tendinopathy. ";
   if (hipStrength) fb += "Hip strengthening supports knee load control. ";
+  if (manual) fb += "Manual therapy may help address patellar mobility and pain. ";
+  if (modalities) fb += "Modalities can be used as an adjunct, but should not be the primary focus. ";
 
   const div = document.getElementById('interventionFeedback');
   div.classList.remove('hidden');
-  div.innerHTML = fb;
+  div.innerHTML = fb || "Consider which interventions best match a reactive tendinopathy with moderate severity and stable symptoms.";
 }
+
+// INITIAL STEP
+showStep(1);
 </script>
 
 </body>
