@@ -19,9 +19,17 @@
 <h1>The Knee That Didn’t Bounce Back</h1>
 <p>You are the PTA carrying out an established PT Plan of Care. Review the note, interview the patient, determine SINSS, then choose appropriate interventions.</p>
 
-<!-- PT Plan of Care -->
 <div class="card">
   <h2>PT Plan of Care Note</h2>
+
+  <h3>Diagnosis</h3>
+  <p>Reactive patellar tendinopathy of the right knee.</p>
+
+  <h3>Mechanism of Injury</h3>
+  <p>Patient reports onset of anterior knee pain after increasing running mileage and adding downhill routes. Symptoms began after a 3-mile run with stair descents.</p>
+
+  <h3>Date of Injury</h3>
+  <p>Symptoms began approximately 3 weeks ago.</p>
 
   <h3>Subjective</h3>
   <p>
@@ -97,6 +105,7 @@
     • Progress to isotonic loading as tolerated
   </p>
 </div>
+
 
 <!-- Patient Interview -->
 <div class="card">
@@ -249,7 +258,15 @@ function selectSINSS(component, choice) {
     else text = "<strong>Not quite</strong><br>Chronic fits months of symptoms.";
   }
 
-  fb.innerHTML = text;
+fb.innerHTML = text;
+
+// Color coding: blue = correct, yellow = incorrect
+if (text.startsWith("<strong>Holds up")) {
+  fb.style.backgroundColor = "#dfeaff";   // light blue
+} else {
+  fb.style.backgroundColor = "#fff4b3";   // light yellow
+}
+
 
   if (!practiceMode) sinssLocked[component] = true;
 }
