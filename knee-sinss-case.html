@@ -10,7 +10,7 @@
     .question { margin-top: 10px; }
     button { margin-top: 10px; padding: 8px 14px; cursor: pointer; }
     .hidden { display: none; }
-    .feedback { margin-top: 10px; font-style: italic; color: #444; }
+    .feedback { margin-top: 10px; padding: 10px; border-radius: 6px; background: #eef; }
   </style>
 </head>
 
@@ -101,51 +101,62 @@
 <!-- Patient Interview -->
 <div class="card">
   <h2>Patient Interview</h2>
-  <p>Click each question to ask the patient. Gather all answers before determining SINSS.</p>
+  <p>Click each question to ask the patient. Answers will appear in the Subjective Findings box.</p>
 
-  <div class="question">
-    <button onclick="answerPain()">Ask: Can you tell me about your pain today?</button>
-    <div id="painAnswer" class="feedback hidden"></div>
-  </div>
+  <div class="question"><button onclick="answerPain()">Ask: Can you tell me about your pain today?</button></div>
+  <div class="question"><button onclick="answerAgg()">Ask: What activities make your symptoms worse?</button></div>
+  <div class="question"><button onclick="answerEase()">Ask: What helps your symptoms?</button></div>
+  <div class="question"><button onclick="answerOnset()">Ask: How quickly does your pain come on?</button></div>
+  <div class="question"><button onclick="answerDuration()">Ask: How long does your pain last after activity?</button></div>
+  <div class="question"><button onclick="answerStability()">Ask: Has anything changed since your last visit?</button></div>
+</div>
 
-  <div class="question">
-    <button onclick="answerAgg()">Ask: What activities make your symptoms worse?</button>
-    <div id="aggAnswer" class="feedback hidden"></div>
-  </div>
-
-  <div class="question">
-    <button onclick="answerEase()">Ask: What helps your symptoms?</button>
-    <div id="easeAnswer" class="feedback hidden"></div>
-  </div>
-
-  <div class="question">
-    <button onclick="answerOnset()">Ask: How quickly does your pain come on?</button>
-    <div id="onsetAnswer" class="feedback hidden"></div>
-  </div>
-
-  <div class="question">
-    <button onclick="answerDuration()">Ask: How long does your pain last after activity?</button>
-    <div id="durationAnswer" class="feedback hidden"></div>
-  </div>
-
-  <div class="question">
-    <button onclick="answerStability()">Ask: Has anything changed since your last visit?</button>
-    <div id="stabilityAnswer" class="feedback hidden"></div>
-  </div>
-
-  <button onclick="showSINSSPage()">Proceed to SINSS Assignment</button>
+<!-- Subjective Findings -->
+<div class="card" id="subjectiveCard">
+  <h2>Subjective Findings</h2>
+  <div id="subjectiveBox" class="feedback"></div>
+  <button onclick="showSINSSCard()">Classify his status</button>
 </div>
 
 <!-- SINSS Assignment -->
 <div class="card hidden" id="sinssCard">
-  <h2>SINSS Assignment</h2>
-  <p>Based on the interview, assign values for each SINSS component.</p>
+  <h2>Phase 3 – Classify</h2>
+  <p>Set his SINSS values. Use the findings above. Pick once per row — you’ll see whether it holds up and why.</p>
 
-  <p><strong>Severity:</strong> Moderate</p>
-  <p><strong>Irritability:</strong> Moderate–High</p>
-  <p><strong>Nature:</strong> Nociceptive</p>
-  <p><strong>Stability:</strong> Same</p>
-  <p><strong>Stage:</strong> Subacute</p>
+  <!-- Severity -->
+  <h3>Severity</h3>
+  <button onclick="selectSINSS('severity','mild')">Mild</button>
+  <button onclick="selectSINSS('severity','moderate')">Moderate</button>
+  <button onclick="selectSINSS('severity','severe')">Severe</button>
+  <div id="severityFeedback" class="feedback hidden"></div>
+
+  <!-- Irritability -->
+  <h3>Irritability</h3>
+  <button onclick="selectSINSS('irritability','low')">Low</button>
+  <button onclick="selectSINSS('irritability','moderate')">Moderate</button>
+  <button onclick="selectSINSS('irritability','high')">High</button>
+  <div id="irritabilityFeedback" class="feedback hidden"></div>
+
+  <!-- Nature -->
+  <h3>Nature</h3>
+  <button onclick="selectSINSS('nature','nociceptive')">Nociceptive</button>
+  <button onclick="selectSINSS('nature','neuropathic')">Neuropathic</button>
+  <button onclick="selectSINSS('nature','nociplastic')">Nociplastic</button>
+  <div id="natureFeedback" class="feedback hidden"></div>
+
+  <!-- Stability -->
+  <h3>Stability</h3>
+  <button onclick="selectSINSS('stability','improving')">Improving</button>
+  <button onclick="selectSINSS('stability','same')">Same</button>
+  <button onclick="selectSINSS('stability','worsening')">Worsening</button>
+  <div id="stabilityFeedback" class="feedback hidden"></div>
+
+  <!-- Stage -->
+  <h3>Stage</h3>
+  <button onclick="selectSINSS('stage','acute')">Acute</button>
+  <button onclick="selectSINSS('stage','subacute')">Subacute</button>
+  <button onclick="selectSINSS('stage','chronic')">Chronic</button>
+  <div id="stageFeedback" class="feedback hidden"></div>
 
   <button onclick="showInterventions()">Proceed to Intervention Selection</button>
 </div>
@@ -153,16 +164,13 @@
 <!-- Intervention Selection -->
 <div class="card hidden" id="interventionsCard">
   <h2>Intervention Selection</h2>
-  <p>Based on the SINSS profile, choose appropriate interventions for today’s visit.</p>
 
-  <div class="question">
-    <label><input type="checkbox" id="isometric"> Isometric quad loading</label><br>
-    <label><input type="checkbox" id="hipStrength"> Hip strengthening</label><br>
-    <label><input type="checkbox" id="isotonic"> High-load isotonic quad strengthening</label><br>
-    <label><input type="checkbox" id="manual"> Manual therapy to patellar tendon region</label><br>
-    <label><input type="checkbox" id="modalities"> Modalities for pain/swelling</label><br>
-    <label><input type="checkbox" id="education"> Education on load management</label>
-  </div>
+  <label><input type="checkbox" id="isometric"> Isometric quad loading</label><br>
+  <label><input type="checkbox" id="hipStrength"> Hip strengthening</label><br>
+  <label><input type="checkbox" id="isotonic"> High-load isotonic quad strengthening</label><br>
+  <label><input type="checkbox" id="manual"> Manual therapy to patellar tendon region</label><br>
+  <label><input type="checkbox" id="modalities"> Modalities for pain/swelling</label><br>
+  <label><input type="checkbox" id="education"> Education on load management</label><br>
 
   <button onclick="evaluateInterventions()">Submit Interventions</button>
   <div id="interventionFeedback" class="feedback hidden"></div>
@@ -175,44 +183,75 @@
 </div>
 
 <script>
-function answerPain() {
-  const ans = document.getElementById('painAnswer');
-  ans.classList.remove('hidden');
-  ans.innerHTML = "My pain is about a 6/10 today. At best it's a 2, at worst a 7.";
+// PRACTICE MODE: true = can change selections; false = testing mode (locks)
+let practiceMode = true;
+
+// Append interview answers
+function appendSubjective(text) {
+  const box = document.getElementById('subjectiveBox');
+  box.innerHTML += text + "<br>";
 }
 
-function answerAgg() {
-  const ans = document.getElementById('aggAnswer');
-  ans.classList.remove('hidden');
-  ans.innerHTML = "Stairs, squatting, running, and prolonged standing make it worse.";
-}
+function answerPain() { appendSubjective("Pain: about 6/10 today. Best 2/10, worst 7/10."); }
+function answerAgg() { appendSubjective("Aggravating: stairs, squatting, running, prolonged standing."); }
+function answerEase() { appendSubjective("Easing: rest and ice help, but pain lingers for hours."); }
+function answerOnset() { appendSubjective("Onset: pain comes on quickly with activity."); }
+function answerDuration() { appendSubjective("Duration: symptoms last a couple hours after activity."); }
+function answerStability() { appendSubjective("Stability: about the same over the past week."); }
 
-function answerEase() {
-  const ans = document.getElementById('easeAnswer');
-  ans.classList.remove('hidden');
-  ans.innerHTML = "Rest and ice help, but the pain lingers for a couple hours.";
-}
-
-function answerOnset() {
-  const ans = document.getElementById('onsetAnswer');
-  ans.classList.remove('hidden');
-  ans.innerHTML = "It comes on fast when I go down stairs.";
-}
-
-function answerDuration() {
-  const ans = document.getElementById('durationAnswer');
-  ans.classList.remove('hidden');
-  ans.innerHTML = "It lasts a couple hours after activity.";
-}
-
-function answerStability() {
-  const ans = document.getElementById('stabilityAnswer');
-  ans.classList.remove('hidden');
-  ans.innerHTML = "It’s about the same as last week.";
-}
-
-function showSINSSPage() {
+function showSINSSCard() {
   document.getElementById('sinssCard').classList.remove('hidden');
+}
+
+const sinssLocked = {
+  severity: false,
+  irritability: false,
+  nature: false,
+  stability: false,
+  stage: false
+};
+
+function selectSINSS(component, choice) {
+  if (!practiceMode && sinssLocked[component]) return;
+
+  const fb = document.getElementById(component + "Feedback");
+  fb.classList.remove("hidden");
+
+  let text = "";
+
+  if (component === "severity") {
+    if (choice === "moderate") text = "<strong>Holds up</strong><br>6/10 with activity fits the moderate band.";
+    else if (choice === "mild") text = "<strong>Not quite</strong><br>His pain reaches 6–7/10 with stairs.";
+    else text = "<strong>Not quite</strong><br>Severe would be 7–10/10 consistently.";
+  }
+
+  if (component === "irritability") {
+    if (choice === "high") text = "<strong>Holds up</strong><br>Pain comes on quickly and lingers for hours.";
+    else if (choice === "moderate") text = "<strong>Not quite</strong><br>Moderate irritability settles faster.";
+    else text = "<strong>Not quite</strong><br>Low irritability would resolve quickly.";
+  }
+
+  if (component === "nature") {
+    if (choice === "nociceptive") text = "<strong>Holds up</strong><br>Localized anterior knee pain with mechanical load sensitivity.";
+    else if (choice === "neuropathic") text = "<strong>Not quite</strong><br>No pins/needles or radiating symptoms.";
+    else text = "<strong>Not quite</strong><br>Nociplastic pain is less mechanically predictable.";
+  }
+
+  if (component === "stability") {
+    if (choice === "same") text = "<strong>Holds up</strong><br>Symptoms have been stable over the past week.";
+    else if (choice === "improving") text = "<strong>Not quite</strong><br>No clear trend of improvement.";
+    else text = "<strong>Not quite</strong><br>No evidence of worsening.";
+  }
+
+  if (component === "stage") {
+    if (choice === "subacute") text = "<strong>Holds up</strong><br>Three weeks fits the subacute band.";
+    else if (choice === "acute") text = "<strong>Not quite</strong><br>Acute fits the first few days.";
+    else text = "<strong>Not quite</strong><br>Chronic fits months of symptoms.";
+  }
+
+  fb.innerHTML = text;
+
+  if (!practiceMode) sinssLocked[component] = true;
 }
 
 function showInterventions() {
@@ -227,31 +266,22 @@ function evaluateInterventions() {
   const modalities = document.getElementById('modalities').checked;
   const education = document.getElementById('education').checked;
 
-  let feedback = "";
+  let fb = "";
 
-  if (isotonic) {
-    feedback += "High-load isotonic strengthening is not appropriate today due to moderate–high irritability. ";
-  }
-  if (!education) {
-    feedback += "Education on load management is essential for patellar tendinopathy. ";
-  }
-  if (isometric) {
-    feedback += "Isometric quad loading is appropriate for reactive tendinopathy. ";
-  }
-  if (hipStrength) {
-    feedback += "Hip strengthening supports knee load control. ";
-  }
+  if (isotonic) fb += "High-load isotonic strengthening is not appropriate today. ";
+  if (!education) fb += "Education on load management is essential. ";
+  if (isometric) fb += "Isometric quad loading is appropriate for reactive tendinopathy. ";
+  if (hipStrength) fb += "Hip strengthening supports knee load control. ";
 
-  const feedbackDiv = document.getElementById('interventionFeedback');
-  feedbackDiv.classList.remove('hidden');
-  feedbackDiv.innerHTML = feedback;
+  const div = document.getElementById('interventionFeedback');
+  div.classList.remove('hidden');
+  div.innerHTML = fb;
 
-  const debrief = document.getElementById('debriefCard');
-  const debriefText = document.getElementById('debriefText');
-  debrief.classList.remove('hidden');
-  debriefText.innerText =
-    "Moderate severity and moderate–high irritability suggest lower-intensity loading today. " +
-    "Isometrics and hip strengthening are appropriate. Avoid high-load isotonic quad work until irritability decreases.";
+  const d = document.getElementById('debriefCard');
+  const dt = document.getElementById('debriefText');
+  d.classList.remove('hidden');
+  dt.innerText =
+    "A moderate severity, high irritability, nociceptive, subacute presentation calls for lower-intensity loading and careful progression.";
 }
 </script>
 
