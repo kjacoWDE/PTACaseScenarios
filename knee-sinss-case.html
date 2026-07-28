@@ -91,36 +91,43 @@
   </div>
 
   <!-- Patient Interview -->
-  <div class="card">
-    <h2>2. Interview</h2>
-    <p>Click each question to ask the patient.</p>
+ <div class="card">
+  <h2>2. Interview</h2>
+  <p>Click each question to ask the patient.</p>
 
-    <div class="question">
-      <button onclick="answerPain()">“Can you tell me how your knee is feeling today?”</button>
-    </div>
-
-    <div class="question">
-      <button onclick="answerAgg()">“What activities tend to make your knee pain worse?”</button>
-    </div>
-
-    <div class="question">
-      <button onclick="answerEase()">“What have you found that helps ease your symptoms?”</button>
-    </div>
-
-    <div class="question">
-      <button onclick="answerOnset()">“When you start an activity, how quickly does the pain come on?”</button>
-    </div>
-
-    <div class="question">
-      <button onclick="answerDuration()">“After an activity aggravates it, how long does the pain usually last?”</button>
-    </div>
-
-    <div class="question">
-      <button onclick="answerStability()">“Since your last visit, have your symptoms changed at all?”</button>
-    </div>
-
-    <button onclick="showSINSSCard()">Proceed to SINSS Classification</button>
+  <div class="question">
+    <button onclick="answerPain()">“Can you tell me how your knee is feeling today?”</button>
+    <div id="localPain" class="feedback"></div>
   </div>
+
+  <div class="question">
+    <button onclick="answerAgg()">“What activities tend to make your knee pain worse?”</button>
+    <div id="localAgg" class="feedback"></div>
+  </div>
+
+  <div class="question">
+    <button onclick="answerEase()">“What have you found that helps ease your symptoms?”</button>
+    <div id="localEase" class="feedback"></div>
+  </div>
+
+  <div class="question">
+    <button onclick="answerOnset()">“When you start an activity, how quickly does the pain come on?”</button>
+    <div id="localOnset" class="feedback"></div>
+  </div>
+
+  <div class="question">
+    <button onclick="answerDuration()">“After an activity aggravates it, how long does the pain usually last?”</button>
+    <div id="localDuration" class="feedback"></div>
+  </div>
+
+  <div class="question">
+    <button onclick="answerStability()">“Since your last visit, have your symptoms changed at all?”</button>
+    <div id="localStability" class="feedback"></div>
+  </div>
+
+  <button onclick="showSINSSCard()">Proceed to SINSS Classification</button>
+</div>
+
 
   <!-- SINSS Assignment -->
   <div class="card hidden" id="sinssCard">
@@ -201,27 +208,39 @@
 <script>
 // Interview answer functions (updated)
 function answerPain() {
-  appendSubjective("“It’s about a 6 out of 10 today. Best is 2/10, worst is 7/10.”");
+  const text = "“It’s about a 6 out of 10 today. Best is 2/10, worst is 7/10.”";
+  appendSubjective(text);
+  document.getElementById("localPain").innerHTML = text;
 }
 
 function answerAgg() {
-  appendSubjective("“Stairs, squatting, running, and standing for a long time all make it worse.”");
+  const text = "“Stairs, squatting, running, and standing for a long time all make it worse.”";
+  appendSubjective(text);
+  document.getElementById("localAgg").innerHTML = text;
 }
 
 function answerEase() {
-  appendSubjective("“Rest and ice help, but it still aches for a couple of hours afterward.”");
+  const text = "“Rest and ice help, but it still aches for a couple of hours afterward.”";
+  appendSubjective(text);
+  document.getElementById("localEase").innerHTML = text;
 }
 
 function answerOnset() {
-  appendSubjective("“It comes on pretty quickly once I start moving or loading it.”");
+  const text = "“It comes on pretty quickly once I start moving or loading it.”";
+  appendSubjective(text);
+  document.getElementById("localOnset").innerHTML = text;
 }
 
 function answerDuration() {
-  appendSubjective("“If I aggravate it, the pain hangs around for a couple of hours.”");
+  const text = "“If I aggravate it, the pain hangs around for a couple of hours.”";
+  appendSubjective(text);
+  document.getElementById("localDuration").innerHTML = text;
 }
 
 function answerStability() {
-  appendSubjective("“Honestly, it’s been about the same this week.”");
+  const text = "“Honestly, it’s been about the same this week.”";
+  appendSubjective(text);
+  document.getElementById("localStability").innerHTML = text;
 }
 
 // PRACTICE MODE: true = can change selections; false = testing mode
